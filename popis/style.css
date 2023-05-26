@@ -1,0 +1,28 @@
+.popis_cont {
+  margin-top: 50px;
+}
+
+.sbm_btn {
+  background-color: rgb(207, 207, 207) !important;
+  border: 1px solid rgb(136, 136, 136) !important;
+}
+.sbm_btn:hover {
+  background-color: rgb(136, 136, 136) !important;
+}
+
+.adm_btn {
+  background-color: rgb(212, 247, 159) !important;
+  border: 1px solid rgb(166, 199, 116) !important;
+}
+
+.adm_btn:hover {
+  background-color: rgb(166, 199, 116) !important;
+}
+
+#popisForm > label, #popisForm > div.mb-3 > label {
+  display: block;
+  font-weight: bold;
+}
+#popisForm > input, #popisForm > select {
+  margin-bottom: 10px;
+}
