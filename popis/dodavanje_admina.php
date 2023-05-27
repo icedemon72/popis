@@ -12,6 +12,21 @@
   $errors = '';
   $success = false;
 
+  $adminInfo = array(
+    'email' => array(),
+    'korisnicko_ime' => array()
+  );
+
+  $sql = "SELECT * FROM administratori WHERE glavni != 1";
+
+  $result = $conn->query($sql);
+
+  while($row = $result->fetch_assoc()) {
+    array_push($adminInfo['email'], $row['email']);
+    array_push($adminInfo['korisnicko_ime'], $row['ime']);
+  }
+
+  
   if(isset($_POST['submit'])) {
     $email = $_POST['email'];
     $ime = $_POST['ime'];
@@ -24,6 +39,7 @@
       $sql = "INSERT INTO administratori(ime, email, lozinka) VALUES ('$ime', '$email', '$lozinka')";
       $conn->query($sql);
       $success = true;
+      header("Refresh: 1, URL=./dodavanje_admina.php");
     }
     
   }
@@ -97,6 +113,29 @@
       </div>
     </div>
   </div>
+ 
+  <h3 class="text-center mt-5">Lista admina</h3>
+  <div class="container-fluid d-flex justify-content-center">
+  <table class="table table-striped table-responsive w-75">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>E-mail adresa</th>
+            <th>Korisničko ime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php for($i = 0; $i < count($adminInfo['email']); $i++): ?>
+            <tr>
+              <td><?php echo ($i + 1)?></td>
+              <td><?php echo $adminInfo['email'][$i]?></td>
+              <td><?php echo $adminInfo['korisnicko_ime'][$i]?></td>
+            </tr>
+          <?php endfor; ?>
+        </tbody>
+      </table>
+  </div>
+
 
   <script src="./bootstrap.bundle.min.js"></script>
 </body>
