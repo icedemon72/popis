@@ -22,10 +22,10 @@ if (isset($_POST['submit_btn'])) {
     $done = true;
     if (checkIfSuperAdmin($user, $conn)) {
       $_SESSION['superadmin'] = true;
-      header("Refresh:2 ; URL=./dodavanje_admina.php");
+      header("Refresh:2 ; URL=./superadmin.php");
     } else {
-      $_SESSION['admin'] = true;
-      header("Refresh:2 ; URL=./popis.php");
+      $_SESSION['admin'] = $user;
+      header("Refresh:2 ; URL=./admin.php");
     }
   } else {
     $errorMessage = 'Pogrešne login informacije!';

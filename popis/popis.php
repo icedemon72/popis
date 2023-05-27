@@ -6,12 +6,6 @@ if (!isset($_SESSION['superadmin']) && !isset($_SESSION['admin'])) {
   exit();
 }
 
-if (isset($_POST['logout'])) {
-  unset($_SESSION['superadmin']);
-  unset($_SESSION['admin']);
-  header('Location: ./index.php');
-}
-
 include('./db.php');
 
 $success = false;
@@ -63,7 +57,15 @@ if(isset($_POST['submit'])) {
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <?php if (isset($_SESSION['admin'])): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="./admin.php">Početna</a>
+            </li>
+          <?php endif; ?>
           <?php if (isset($_SESSION['superadmin'])) : ?>
+            <li class="nav-item">
+              <a class="nav-link" href="./superadmin.php">Početna</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="./dodavanje_admina.php">Dodaj admina</a>
             </li>
@@ -76,7 +78,7 @@ if(isset($_POST['submit'])) {
           </li>
         </ul>
         <div class="nav-item d-flex">
-          <form method="post">
+          <form method="post" action="./logout.php">
             <input class="nav-link" type="submit" value="Izloguj se" name="logout">
           </form>
         </div>

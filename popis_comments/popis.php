@@ -45,6 +45,7 @@ if(isset($_POST['submit'])) {
           VALUES ('$ime', '$grad', '$opstina', '$adresa', '$objekat', '$povrsina', '$clanovi', '$datum', '$godine', '$strucna', '$posao', '$brak');";
 
   // ukoliko se nas query izvrsi stranica ce biti refresh-ovana za 1s
+  // da bismo mogli nove gradjane ubaciti ako zelimo
   if($conn->query($sql)) {
     $success = true;
     header('Refresh: 1, URL=./popis.php');

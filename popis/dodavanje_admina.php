@@ -9,11 +9,6 @@
   include('./db.php');
   include('./funkcije.php');
 
-  if(isset($_POST['logout'])) {
-    unset($_SESSION['superadmin']);
-    header('Location: ./index.php');
-  }
-
   $errors = '';
   $success = false;
 
@@ -56,6 +51,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
+            <a class="nav-link" href="./superadmin.php">Početna</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" href="./dodavanje_admina.php">Dodaj admina</a>
           </li>
           <li class="nav-item">
@@ -66,7 +64,7 @@
           </li>
         </ul>
         <div class="nav-item d-flex">
-          <form method="post">
+          <form method="post" action="./logout.php">
             <input class="nav-link" type="submit" value="Izloguj se" name="logout">
           </form>
         </div>

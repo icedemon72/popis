@@ -37,12 +37,13 @@ if (isset($_POST['submit_btn'])) {
     if (checkIfSuperAdmin($user, $conn)) {
       // ukoliko jeste stavljamo da je sesija superadmin tacna
       $_SESSION['superadmin'] = true;
-      // korisnik ce biti prebacen na dodavanje_admina.php za 2 sekunde
-      header("Refresh:2 ; URL=./dodavanje_admina.php");
+      // korisnik ce biti prebacen na superadmin.php za 2 sekunde
+      header("Refresh:2 ; URL=./superadmin.php");
     } else {
       // ukoliko korisnik nije superadmin, a tacna mu je lozinka znaci da je admin
-      $_SESSION['admin'] = true;
-      header("Refresh:2 ; URL=./popis.php");
+      // i dodeljujemo mu username u sesiji, ovo ce nam trebati kada pisemo ime ulogovanog admina
+      $_SESSION['admin'] = $user; 
+      header("Refresh:2 ; URL=./admin.php");
     }
   } else {
     // ukoliko nije tacna sifra ili korisnicko ime bice ispisana ova poruka

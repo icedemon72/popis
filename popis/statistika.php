@@ -6,11 +6,6 @@ if (!isset($_SESSION['superadmin'])) {
   exit();
 }
 
-if (isset($_POST['logout'])) {
-  unset($_SESSION['superadmin']);
-  header('Location: ./index.php');
-}
-
 include('./db.php');
 
 $gradovi = array(
@@ -148,6 +143,9 @@ for ($i = 0; $i < count($opstine['nazivOpstine']); $i++) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
+            <a class="nav-link" href="./superadmin.php">Početna</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="./dodavanje_admina.php">Dodaj admina</a>
           </li>
           <li class="nav-item">
@@ -158,7 +156,7 @@ for ($i = 0; $i < count($opstine['nazivOpstine']); $i++) {
           </li>
         </ul>
         <div class="nav-item d-flex">
-          <form method="post">
+          <form method="post" action="./logout.php">
             <input class="nav-link" type="submit" value="Izloguj se" name="logout">
           </form>
         </div>
@@ -170,15 +168,15 @@ for ($i = 0; $i < count($opstine['nazivOpstine']); $i++) {
     <h1 class="text-center mt-2 mb-5">Statistika</h1>
     <div class="row mb-5">
       <h3 class="text-center mb-1">Gradovi</h3>
-      <table class="table table-striped">
+      <table class="table table-striped table-responsive">
         <thead>
           <tr>
             <th scope="col">Naziv grada</th>
             <th scope="col">Broj maloletnih</th>
             <th scope="col">Broj punoletnih</th>
-            <th scope="col">U kućama</th>
-            <th scope="col">U stanovima</th>
-            <th scope="col">Pros. povr. objekta</th>
+            <th class="d-none d-md-table-cell" scope="col">U kućama</th>
+            <th class="d-none d-md-table-cell" scope="col">U stanovima</th>
+            <th class="d-none d-md-table-cell" scope="col">Pros. povr. objekta</th>
             <th scope="col">Ukupno stanovnika</th>
           </tr>
         </thead>
@@ -188,9 +186,9 @@ for ($i = 0; $i < count($opstine['nazivOpstine']); $i++) {
               <th scope="row"><?php echo $gradovi['nazivGrada'][$i] ?></th>
               <td><?php echo $gradovi['brojMladjihOd18'][$i]?></td>
               <td><?php echo $gradovi['brojStarijihOd18'][$i]?></td>
-              <td><?php echo $gradovi['brojKuca'][$i]?></td>
-              <td><?php echo $gradovi['brojStanova'][$i]?></td>
-              <td><?php echo $gradovi['prosecnaPovrsina'][$i]?></td>
+              <td class="d-none d-md-table-cell"><?php echo $gradovi['brojKuca'][$i]?></td>
+              <td class="d-none d-md-table-cell"><?php echo $gradovi['brojStanova'][$i]?></td>
+              <td class="d-none d-md-table-cell"><?php echo $gradovi['prosecnaPovrsina'][$i]?></td>
               <td><?php echo $gradovi['ukupno'][$i]?></td>
             </tr>
           <?php endfor; ?>
@@ -200,15 +198,15 @@ for ($i = 0; $i < count($opstine['nazivOpstine']); $i++) {
     </div>
     <div class="row">
     <h3 class="text-center mb-1">Opštine</h3>
-      <table class="table table-striped">
+      <table class="table table-striped table-responsive">
         <thead>
           <tr>
             <th scope="col">Naziv opštine</th>
             <th scope="col">Broj maloletnih</th>
             <th scope="col">Broj punoletnih</th>
-            <th scope="col">U kućama</th>
-            <th scope="col">U stanovima</th>
-            <th scope="col">Pros. povr. objekta</th>
+            <th class="d-none d-md-table-cell" scope="col">U kućama</th>
+            <th class="d-none d-md-table-cell" scope="col">U stanovima</th>
+            <th class="d-none d-md-table-cell" scope="col">Pros. povr. objekta</th>
             <th scope="col">Ukupno stanovnika</th>
           </tr>
         </thead>
@@ -218,9 +216,9 @@ for ($i = 0; $i < count($opstine['nazivOpstine']); $i++) {
               <th scope="row"><?php echo $opstine['nazivOpstine'][$i] ?></th>
               <td><?php echo $opstine['brojMladjihOd18'][$i]?></td>
               <td><?php echo $opstine['brojStarijihOd18'][$i]?></td>
-              <td><?php echo $opstine['brojKuca'][$i]?></td>
-              <td><?php echo $opstine['brojStanova'][$i]?></td>
-              <td><?php echo $opstine['prosecnaPovrsina'][$i]?></td>
+              <td class="d-none d-md-table-cell"><?php echo $opstine['brojKuca'][$i]?></td>
+              <td class="d-none d-md-table-cell" ><?php echo $opstine['brojStanova'][$i]?></td>
+              <td class="d-none d-md-table-cell"><?php echo $opstine['prosecnaPovrsina'][$i]?></td>
               <td><?php echo $opstine['ukupno'][$i]?></td>
             </tr>
           <?php endfor; ?>

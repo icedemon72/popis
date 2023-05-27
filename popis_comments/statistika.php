@@ -6,11 +6,6 @@ if (!isset($_SESSION['superadmin'])) {
   exit();
 }
 
-if (isset($_POST['logout'])) {
-  unset($_SESSION['superadmin']);
-  header('Location: ./index.php');
-}
-
 include('./db.php');
 
 // ovde pravimo multidimenzionalne nizove, koji su isti
@@ -86,7 +81,7 @@ for ($i = 0; $i < count($gradovi['nazivGrada']); $i++) {
   array_push($gradovi['brojStanova'], $gradovi['ukupno'][$i] - $gradovi['brojKuca'][$i]);
 
   // prosecna povrsina objekta
-  // IZABERI PROSECNU POVRSINU ZAOKRUZENU NA 2 DECIMALE KAO povrsina IZ popisani GDE JE grad jednak $grad"
+  // IZABERI PROSECNU POVRSINU ZAOKRUZENU NA 2 DECIMALE KAO 'povrsina' IZ popisani GDE JE grad jednak $grad"
   $sql = "SELECT ROUND(AVG(povrsina), 2) AS povrsina FROM popisani WHERE grad = '$grad'";
   $result = $conn->query($sql);
   while ($row = $result->fetch_assoc()) {
