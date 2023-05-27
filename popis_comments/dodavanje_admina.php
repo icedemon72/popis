@@ -27,6 +27,23 @@
   $errors = '';
   $success = false;
 
+  // pravimo asocijativni niz da bismo smestili informacije o adminima
+  $adminInfo = array(
+    'email' => array(),
+    'korisnicko_ime' => array()
+  );
+
+  // SQL "IZABERE SVE IZ administratori GDE glavni NIJE JEDNAK 1"
+  $sql = "SELECT * FROM administratori WHERE glavni != 1";
+
+  $result = $conn->query($sql);
+
+  // smestamo sve podatke o administratorima u asocijativni niz
+  while($row = $result->fetch_assoc()) {
+    array_push($adminInfo['email'], $row['email']);
+    array_push($adminInfo['korisnicko_ime'], $row['ime']);
+  }
+
   // ukoliko je kliknuto dugme sa name="submit" ovo ce se pokrenuti
   if(isset($_POST['submit'])) {
     // uzimamo name="email", name="ime" itd.
@@ -114,6 +131,29 @@
         <?php endif; ?>
       </div>
     </div>
+  </div>
+
+  <h3 class="text-center mt-5">Lista admina</h3>
+  <div class="container-fluid d-flex justify-content-center">
+  <table class="table table-striped table-responsive w-75">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>E-mail adresa</th>
+            <th>Korisničko ime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Pomocu for loop-a ispisujemo informacije o adminima -->
+          <?php for($i = 0; $i < count($adminInfo['email']); $i++): ?>
+            <tr>
+              <td><?php echo ($i + 1)?></td>
+              <td><?php echo $adminInfo['email'][$i]?></td>
+              <td><?php echo $adminInfo['korisnicko_ime'][$i]?></td>
+            </tr>
+          <?php endfor; ?>
+        </tbody>
+      </table>
   </div>
 
   <script src="./bootstrap.bundle.min.js"></script>
